@@ -1,0 +1,8 @@
+{
+  "name": "Infinity Beyond - Elite Mindset Coaching",
+  "description": "High-conversion professional landing page for Infinity Beyond, featuring mindset coaching for ambitious young adults with premium visual identity and conversion-optimized sections.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

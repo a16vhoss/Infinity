@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="es" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinity Beyond ∞ | Elite Mindset Coaching</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Epilogue:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Calendly Widget Script -->
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <style>
+      :root {
+        --gold: #D4AF37;
+        --silver: #C0C0C0;
+      }
+      
+      body {
+        background-color: #000000;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+      }
+      
+      .font-display {
+        font-family: 'Epilogue', sans-serif;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #000000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #D4AF37;
+        border-radius: 10px;
+      }
+
+      /* Refined Manifest Animations (Focusing vs Sliding) */
+      .reveal {
+        opacity: 0;
+        transform: scale(0.98) translateY(10px);
+        transition: opacity 1.2s cubic-bezier(0.2, 1, 0.3, 1), transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+        will-change: transform, opacity;
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      .reveal-left {
+        opacity: 0;
+        transform: translateX(-20px);
+        transition: opacity 1.2s cubic-bezier(0.2, 1, 0.3, 1), transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+      }
+
+      .reveal-left.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .reveal-right {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: opacity 1.2s cubic-bezier(0.2, 1, 0.3, 1), transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+      }
+
+      .reveal-right.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Staggered children reveal */
+      .stagger-container .reveal, 
+      .stagger-container .reveal-left,
+      .stagger-container .reveal-right {
+        transition-delay: calc(var(--delay) * 80ms);
+      }
+
+      /* Keyframes */
+      @keyframes float {
+        0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        50% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); }
+      }
+
+      @keyframes rotate-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      .animate-float {
+        animation: float 10s infinite ease-in-out;
+      }
+
+      .animate-rotate-slow {
+        animation: rotate-slow 40s infinite linear;
+      }
+
+      .quantum-glow {
+        transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+      }
+
+      .quantum-glow:hover {
+        box-shadow: 0 0 40px rgba(212, 175, 55, 0.15);
+        transform: scale(1.02);
+      }
+
+      /* Text highlight animation */
+      .text-shimmer {
+        background: linear-gradient(to right, #D4AF37 20%, #FFFFFF 40%, #FFFFFF 60%, #D4AF37 80%);
+        background-size: 200% auto;
+        color: #000;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 8s linear infinite;
+      }
+
+      @keyframes shimmer {
+        to { background-position: 200% center; }
+      }
+
+      /* Smooth interaction for FAQ */
+      .faq-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .faq-active .faq-content {
+        max-height: 500px;
+      }
+    </style>
+    <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Lightweight Reveal Engine
+      document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+          threshold: 0.05,
+          rootMargin: "0px 0px -10% 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, observerOptions);
+
+        const observeElements = () => {
+          document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+            observer.observe(el);
+          });
+        };
+
+        observeElements();
+
+        const mutationObserver = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+              if (node.nodeType === 1) {
+                if (node.classList.contains('reveal') || node.classList.contains('reveal-left') || node.classList.contains('reveal-right')) {
+                  observer.observe(node);
+                }
+                node.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+              }
+            });
+          });
+        });
+
+        mutationObserver.observe(document.body, { childList: true, subtree: true });
+      });
+    </script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
