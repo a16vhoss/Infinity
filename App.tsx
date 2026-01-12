@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { 
-  Infinity, 
-  Instagram, 
-  Youtube, 
-  ChevronRight, 
-  Check, 
-  X as CloseIcon, 
+import {
+  Infinity,
+  Instagram,
+  Youtube,
+  ChevronRight,
+  Check,
+  X as CloseIcon,
   MessageCircle,
   Trophy,
   GraduationCap,
@@ -17,6 +17,13 @@ import {
 } from 'lucide-react';
 import { LeadMagnetModal } from './components/LeadMagnetModal';
 import { CalendlyModal } from './components/CalendlyModal';
+
+const SOCIAL_LINKS = {
+  IG: "https://www.instagram.com/proyect.infinity/",
+  Tik: "https://www.tiktok.com/@infinithoss",
+  YT: "https://www.youtube.com/@Infinity_Beyond-z5s"
+};
+
 import { MENTAL_LIMITS, HISTORY_TIMELINE, INFINITY_PHASES, PRICE_TIERS } from './constants';
 
 const App: React.FC = () => {
@@ -55,9 +62,9 @@ const App: React.FC = () => {
       <LeadMagnetModal isOpen={isLeadModalOpen} onClose={() => setIsLeadModalOpen(false)} />
       <CalendlyModal isOpen={isCalendlyOpen} onClose={() => setIsCalendlyOpen(false)} />
 
-      <a 
-        href="https://wa.me/yournumber" 
-        target="_blank" 
+      <a
+        href="https://wa.me/yournumber"
+        target="_blank"
         className="fixed bottom-6 right-6 z-50 md:hidden bg-[#25D366] p-4 rounded-full shadow-lg text-white hover:scale-110 transition-transform duration-300"
       >
         <MessageCircle className="w-6 h-6" />
@@ -70,7 +77,7 @@ const App: React.FC = () => {
             <span className="font-display font-bold text-xl uppercase tracking-[0.2em] hidden sm:inline transition-colors group-hover:text-[#D4AF37]">Infinity Beyond</span>
           </div>
           <div className="flex gap-4 reveal-right">
-            <button 
+            <button
               onClick={openCalendly}
               className="bg-[#D4AF37] text-black px-6 py-2 rounded-lg text-sm font-bold uppercase tracking-widest hover:bg-white transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-[#D4AF37]/10"
             >
@@ -104,13 +111,13 @@ const App: React.FC = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-6 justify-center reveal" style={{ '--delay': 4 } as any}>
-              <button 
+              <button
                 onClick={openCalendly}
                 className="bg-[#D4AF37] text-black px-10 py-6 rounded-lg text-lg font-bold uppercase tracking-widest hover:bg-white transition-all duration-500 shadow-2xl quantum-glow"
               >
                 Agenda Sesión Gratis
               </button>
-              <button 
+              <button
                 onClick={() => setIsLeadModalOpen(true)}
                 className="border border-[#C0C0C0]/40 text-white px-10 py-6 rounded-lg text-lg font-light uppercase tracking-widest hover:bg-white/5 transition-all duration-500 backdrop-blur-sm"
               >
@@ -119,7 +126,7 @@ const App: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 reveal" style={{ '--delay': 8 } as any}>
           <div className="w-px h-16 bg-gradient-to-b from-[#D4AF37] to-transparent animate-pulse"></div>
         </div>
@@ -129,7 +136,14 @@ const App: React.FC = () => {
       <div className="border-y border-white/5 bg-[#080808] py-14">
         <div className="container mx-auto px-6 flex flex-wrap justify-center gap-16 stagger-container">
           {['IG', 'Tik', 'YT'].map((platform, idx) => (
-            <a key={platform} href="#" className="flex flex-col items-center group transition-all reveal" style={{ '--delay': idx } as any}>
+            <a
+              key={platform}
+              href={SOCIAL_LINKS[platform as keyof typeof SOCIAL_LINKS]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center group transition-all reveal"
+              style={{ '--delay': idx } as any}
+            >
               <div className="w-16 h-16 rounded-full border border-white/5 flex items-center justify-center mb-4 group-hover:border-[#D4AF37] group-hover:bg-[#D4AF37]/5 transition-all duration-500">
                 <span className="font-bold text-lg text-white/40 group-hover:text-[#D4AF37]">{platform}</span>
               </div>
@@ -182,7 +196,7 @@ const App: React.FC = () => {
                   </div>
                 </div>
                 <div className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-black border border-[#D4AF37] rounded-full z-10 shadow-[0_0_15px_#D4AF37]">
-                   <div className="absolute inset-0 bg-[#D4AF37] rounded-full animate-ping opacity-10"></div>
+                  <div className="absolute inset-0 bg-[#D4AF37] rounded-full animate-ping opacity-10"></div>
                 </div>
                 <div className="w-1/2"></div>
               </div>
@@ -198,7 +212,7 @@ const App: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-5 gap-12 stagger-container">
             {INFINITY_PHASES.map((p, idx) => (
               <div key={idx} className="flex flex-col items-center text-center reveal group" style={{ '--delay': idx } as any}>
-                <div 
+                <div
                   className="w-16 h-16 rounded-full flex items-center justify-center mb-8 text-xl font-bold transition-all duration-700 group-hover:scale-110 border border-white/5"
                   style={{ backgroundColor: p.color, color: '#000' }}
                 >
@@ -238,9 +252,9 @@ const App: React.FC = () => {
           <div className="reveal">
             <h2 className="text-4xl md:text-6xl font-display mb-16 tracking-tight">Inversión en tu Futuro</h2>
           </div>
-          
+
           {!isPricingExpanded ? (
-            <button 
+            <button
               onClick={() => setIsPricingExpanded(true)}
               className="bg-transparent border border-[#D4AF37]/50 text-[#D4AF37] px-16 py-6 rounded-2xl text-lg font-bold uppercase tracking-widest hover:bg-[#D4AF37] hover:text-black transition-all duration-500 reveal"
             >
@@ -264,7 +278,7 @@ const App: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                  <button 
+                  <button
                     onClick={openCalendly}
                     className={`w-full py-5 rounded-2xl font-bold uppercase tracking-widest transition-all duration-500 hover:scale-[1.02] ${tier.isPopular ? 'bg-[#D4AF37] text-black hover:bg-white' : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white'}`}
                   >
@@ -332,30 +346,30 @@ const App: React.FC = () => {
       <section className="py-32 bg-black">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="bg-[#080808] border border-white/5 p-16 rounded-[3rem] shadow-2xl relative overflow-hidden reveal group hover:border-[#D4AF37]/20 transition-all duration-1000">
-             <Infinity className="absolute top-[-50px] right-[-50px] w-96 h-96 text-[#D4AF37]/5 opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-110 transition-all duration-1000 pointer-events-none" />
-             <div className="relative z-10">
-               <h3 className="text-xs font-bold text-[#D4AF37] uppercase tracking-[0.8em] mb-10 opacity-60">Promesa</h3>
-               <p className="text-3xl md:text-5xl font-display leading-tight mb-20 text-white/90 tracking-tighter">
-                 "No te daré frases bonitas. Te entregaré los <span className="text-[#D4AF37]">sistemas de precisión</span> que me permitieron alcanzar la excelencia antes de los 20."
-               </p>
-               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 stagger-container">
-                 {[
-                   { i: <Trophy />, v: "Top 5%", l: "Atleta" },
-                   { i: <GraduationCap />, v: "#1 Rank", l: "Universidad" },
-                   { i: <Heart />, v: "1+ Año", l: "Relación" },
-                   { i: <Book />, v: "50+ Lib.", l: "Neurociencia" },
-                   { i: <Infinity />, v: "Crec.", l: "Infinito" }
-                 ].map((stat, i) => (
-                   <div key={i} className="flex flex-col gap-4 reveal" style={{ '--delay': i } as any}>
-                     <div className="bg-white/5 w-12 h-12 flex items-center justify-center rounded-2xl text-[#D4AF37]">{stat.i}</div>
-                     <div>
-                       <p className="text-xl font-bold tracking-tight">{stat.v}</p>
-                       <p className="text-[10px] text-white/30 uppercase tracking-[0.2em]">{stat.l}</p>
-                     </div>
-                   </div>
-                 ))}
-               </div>
-             </div>
+            <Infinity className="absolute top-[-50px] right-[-50px] w-96 h-96 text-[#D4AF37]/5 opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-110 transition-all duration-1000 pointer-events-none" />
+            <div className="relative z-10">
+              <h3 className="text-xs font-bold text-[#D4AF37] uppercase tracking-[0.8em] mb-10 opacity-60">Promesa</h3>
+              <p className="text-3xl md:text-5xl font-display leading-tight mb-20 text-white/90 tracking-tighter">
+                "No te daré frases bonitas. Te entregaré los <span className="text-[#D4AF37]">sistemas de precisión</span> que me permitieron alcanzar la excelencia antes de los 20."
+              </p>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 stagger-container">
+                {[
+                  { i: <Trophy />, v: "Top 5%", l: "Atleta" },
+                  { i: <GraduationCap />, v: "#1 Rank", l: "Universidad" },
+                  { i: <Heart />, v: "1+ Año", l: "Relación" },
+                  { i: <Book />, v: "50+ Lib.", l: "Neurociencia" },
+                  { i: <Infinity />, v: "Crec.", l: "Infinito" }
+                ].map((stat, i) => (
+                  <div key={i} className="flex flex-col gap-4 reveal" style={{ '--delay': i } as any}>
+                    <div className="bg-white/5 w-12 h-12 flex items-center justify-center rounded-2xl text-[#D4AF37]">{stat.i}</div>
+                    <div>
+                      <p className="text-xl font-bold tracking-tight">{stat.v}</p>
+                      <p className="text-[10px] text-white/30 uppercase tracking-[0.2em]">{stat.l}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -367,7 +381,7 @@ const App: React.FC = () => {
           <div className="space-y-4 stagger-container">
             {FAQS.map((faq, idx) => (
               <div key={idx} className={`bg-black border border-white/5 rounded-2xl overflow-hidden transition-all duration-500 reveal ${activeFaq === idx ? 'faq-active border-[#D4AF37]/30 ring-1 ring-[#D4AF37]/5 shadow-2xl' : 'hover:border-white/10'}`} style={{ '--delay': idx } as any}>
-                <button 
+                <button
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex justify-between items-center p-8 text-left group"
                 >
@@ -395,13 +409,13 @@ const App: React.FC = () => {
             <h2 className="text-5xl md:text-8xl font-display font-bold mb-10 leading-none tracking-tighter reveal">El momento es <span className="text-shimmer">ahora.</span></h2>
             <p className="text-xl md:text-2xl text-[#666] font-light mb-16 reveal" style={{ '--delay': 2 } as any}>Tu máximo potencial no es una meta futura, es un sistema presente.</p>
             <div className="flex flex-col sm:flex-row gap-8 justify-center reveal" style={{ '--delay': 4 } as any}>
-              <button 
+              <button
                 onClick={openCalendly}
                 className="bg-[#D4AF37] text-black px-12 py-7 rounded-2xl text-xl font-bold uppercase tracking-widest hover:bg-white transition-all duration-500 shadow-2xl quantum-glow"
               >
                 Agenda Gratis
               </button>
-              <button 
+              <button
                 onClick={() => setIsLeadModalOpen(true)}
                 className="border border-white/10 text-white/60 px-12 py-7 rounded-2xl text-xl font-light uppercase tracking-widest hover:bg-white/5 hover:text-white transition-all duration-500 backdrop-blur-md"
               >
@@ -423,8 +437,16 @@ const App: React.FC = () => {
               </div>
               <p className="text-[#444] text-lg font-light italic mb-10 max-w-sm">"Transciende con la precisión de un sistema."</p>
               <div className="flex gap-6">
-                {['IG', 'YT'].map((p) => (
-                  <a key={p} href="#" className="p-4 bg-white/5 rounded-2xl text-white/20 hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-500">{p}</a>
+                {['IG', 'YT', 'Tik'].map((p) => (
+                  <a
+                    key={p}
+                    href={SOCIAL_LINKS[p as keyof typeof SOCIAL_LINKS]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-4 bg-white/5 rounded-2xl text-white/20 hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-all duration-500"
+                  >
+                    {p}
+                  </a>
                 ))}
               </div>
             </div>
