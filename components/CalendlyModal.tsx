@@ -38,23 +38,24 @@ export const CalendlyModal: React.FC<Props> = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* Content Area */}
-        <div className="flex-grow bg-[#000000] relative">
-          {/* Direct Iframe Implementation - More robust than JS widget */}
-          <iframe
-            src={calendlyUrl}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            title="Calendly Scheduling"
-            allowFullScreen
-            className="relative z-10 w-full h-full"
-          ></iframe>
+        {/* Content Area - Floating Card Design */}
+        <div className="flex-grow bg-[#050505] p-0 md:p-6 relative flex items-center justify-center">
+          <div className="w-full h-full bg-white md:rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(212,175,55,0.1)] border border-white/10 relative z-10">
+            {/* Direct Iframe Implementation */}
+            <iframe
+              src={calendlyUrl}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              title="Calendly Scheduling"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
+          </div>
 
-          {/* Helpful overlay while loading (behind iframe) */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center -z-10 bg-black">
-            <div className="animate-spin w-12 h-12 border-4 border-[#D4AF37] border-t-transparent rounded-full mb-4"></div>
-            <p className="text-[#C0C0C0] uppercase tracking-widest text-xs">Cargando Sistema de Agendamiento...</p>
+          {/* Background Loading State */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center -z-0">
+            <div className="animate-spin w-10 h-10 border-2 border-[#D4AF37] border-t-transparent rounded-full mb-4 opacity-50"></div>
           </div>
         </div>
 
