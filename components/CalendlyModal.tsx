@@ -1,16 +1,10 @@
-
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { X, ExternalLink } from 'lucide-react';
+import { InlineWidget } from 'react-calendly';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-}
-
-declare global {
-  interface Window {
-    Calendly: any;
-  }
 }
 
 export const CalendlyModal: React.FC<Props> = ({ isOpen, onClose }) => {
@@ -18,13 +12,6 @@ export const CalendlyModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
   // Replace this link with your actual Calendly booking link
   const calendlyUrl = "https://calendly.com/acme-corp-demo/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=d4af37&background_color=000000&text_color=ffffff";
-
-  useEffect(() => {
-    if (isOpen && window.Calendly) {
-      // Using Calendly JS API for a more professional integrated feel if script is ready
-      // Otherwise fallback to iframe (handled in JSX)
-    }
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -53,18 +40,25 @@ export const CalendlyModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow bg-white relative">
-          {/* Iframe for the Calendly Widget */}
-          <iframe
-            src={calendlyUrl}
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            title="Calendly Scheduling"
-            className="w-full h-full"
-          ></iframe>
+        <div className="flex-grow bg-[#000000] relative overflow-hidden">
+          <div className="absolute inset-0 z-0">
+             <InlineWidget 
+               url={calendlyUrl}
+               styles={{
+                 height: '100%',
+                 width: '100%'
+               }}
+               pageSettings={{
+                 backgroundColor: '000000',
+                 hideEventTypeDetails: false,
+                 hideLandingPageDetails: false,
+                 primaryColor: 'd4af37',
+                 textColor: 'ffffff'
+               }}
+             />
+          </div>
           
-          {/* Helpful overlay in case of 404/Loading */}
+          {/* Helpful overlay while loading (behind widget) */}
           <div className="absolute inset-0 flex flex-col items-center justify-center -z-10 bg-black">
             <div className="animate-spin w-12 h-12 border-4 border-[#D4AF37] border-t-transparent rounded-full mb-4"></div>
             <p className="text-[#C0C0C0] uppercase tracking-widest text-xs">Cargando Sistema de Agendamiento...</p>
