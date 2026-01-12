@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { X, ExternalLink } from 'lucide-react';
-import { InlineWidget } from 'react-calendly';
 
 interface Props {
   isOpen: boolean;
@@ -40,25 +39,19 @@ export const CalendlyModal: React.FC<Props> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Content Area */}
-        <div className="flex-grow bg-[#000000] relative overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <InlineWidget
-              url={calendlyUrl}
-              styles={{
-                height: '100%',
-                width: '100%'
-              }}
-              pageSettings={{
-                backgroundColor: '000000',
-                hideEventTypeDetails: false,
-                hideLandingPageDetails: false,
-                primaryColor: 'd4af37',
-                textColor: 'ffffff'
-              }}
-            />
-          </div>
+        <div className="flex-grow bg-[#000000] relative">
+          {/* Direct Iframe Implementation - More robust than JS widget */}
+          <iframe
+            src={calendlyUrl}
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            title="Calendly Scheduling"
+            allowFullScreen
+            className="relative z-10 w-full h-full"
+          ></iframe>
 
-          {/* Helpful overlay while loading (behind widget) */}
+          {/* Helpful overlay while loading (behind iframe) */}
           <div className="absolute inset-0 flex flex-col items-center justify-center -z-10 bg-black">
             <div className="animate-spin w-12 h-12 border-4 border-[#D4AF37] border-t-transparent rounded-full mb-4"></div>
             <p className="text-[#C0C0C0] uppercase tracking-widest text-xs">Cargando Sistema de Agendamiento...</p>
