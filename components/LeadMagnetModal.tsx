@@ -17,18 +17,28 @@ export const LeadMagnetModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    // Simulate API call
+
+    // Trigger PDF download
     setTimeout(() => {
+      // Create a link element to trigger download
+      const link = document.createElement('a');
+      link.href = '/FLOW.pdf';
+      link.download = 'FLOW-Infinity-Beyond.pdf';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
       onClose();
       setSubmitted(false);
-      alert("¡Ebook enviado a tu correo!");
-    }, 2000);
+      setName('');
+      setEmail('');
+    }, 1500);
   };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
       <div className="relative w-full max-w-lg bg-[#1A1A1A] border border-[#D4AF37]/30 rounded-2xl overflow-hidden shadow-2xl">
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
         >
@@ -50,9 +60,9 @@ export const LeadMagnetModal: React.FC<Props> = ({ isOpen, onClose }) => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-xs uppercase tracking-widest text-[#C0C0C0] mb-2">Nombre</label>
-              <input 
+              <input
                 required
-                type="text" 
+                type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Tu nombre completo"
@@ -61,24 +71,24 @@ export const LeadMagnetModal: React.FC<Props> = ({ isOpen, onClose }) => {
             </div>
             <div>
               <label className="block text-xs uppercase tracking-widest text-[#C0C0C0] mb-2">Email</label>
-              <input 
+              <input
                 required
-                type="email" 
+                type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.com"
                 className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37] transition-colors"
               />
             </div>
-            <button 
+            <button
               type="submit"
               disabled={submitted}
               className="w-full bg-[#D4AF37] text-black font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-white transition-all disabled:opacity-50"
             >
-              {submitted ? "Enviando..." : (
+              {submitted ? "Preparando descarga..." : (
                 <>
                   <Send className="w-4 h-4" />
-                  Obtener Guía Gratis
+                  Descargar Guía Gratis
                 </>
               )}
             </button>
