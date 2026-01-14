@@ -135,7 +135,7 @@ const App: React.FC = () => {
       {/* Social Bar */}
       <div className="border-y border-white/5 bg-[#080808] py-14">
         <div className="container mx-auto px-6 flex flex-wrap justify-center gap-16 stagger-container">
-          {['IG', 'Tik', 'YT'].map((platform, idx) => (
+          {['Tik'].map((platform, idx) => (
             <a
               key={platform}
               href={SOCIAL_LINKS[platform as keyof typeof SOCIAL_LINKS]}
@@ -437,7 +437,7 @@ const App: React.FC = () => {
               </div>
               <p className="text-[#444] text-lg font-light italic mb-10 max-w-sm">"Transciende con la precisión de un sistema."</p>
               <div className="flex gap-6">
-                {['IG', 'YT', 'Tik'].map((p) => (
+                {['Tik'].map((p) => (
                   <a
                     key={p}
                     href={SOCIAL_LINKS[p as keyof typeof SOCIAL_LINKS]}
