@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { X, BookOpen, Send } from 'lucide-react';
+import { supabase } from '../src/supabaseClient';
 
 interface Props {
   isOpen: boolean;
@@ -14,25 +14,40 @@ export const LeadMagnetModal: React.FC<Props> = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
 
-    // Trigger PDF download
-    setTimeout(() => {
-      // Create a link element to trigger download
-      const link = document.createElement('a');
-      link.href = '/FLOW.pdf';
-      link.download = 'FLOW-Infinity-Beyond.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+    try {
+      // 1. Save data to Supabase
+      const { error } = await supabase
+        .from('infinity_leads')
+        .insert([{ name, email }]);
 
+      if (error) {
+        console.error('Error saving lead:', error);
+      }
+
+      // 2. Trigger PDF download
+      setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = '/FLOW.pdf';
+        link.download = 'FLOW-Infinity-Beyond.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        onClose();
+        setSubmitted(false);
+        setName('');
+        setEmail('');
+      }, 1000);
+
+    } catch (err) {
+      console.error('Unexpected error:', err);
+      // Fallback: still invoke download if something crashes
       onClose();
-      setSubmitted(false);
-      setName('');
-      setEmail('');
-    }, 1500);
+    }
   };
 
   return (
